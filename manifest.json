@@ -9,7 +9,6 @@
     "description": "An addictive flappy-style arcade game with dynamic biomes, difficulty levels, and stunning visual effects.",
   "start_url": "https://mdhabib9900.github.io/Feather-Dash/",
   "theme_color": "#ffffff",
-  "id": "https://mdhabib9900.github.io/Feather-Dash/"
   "icons": [
     {
       "src": "icon-72x72.png",
