@@ -21,20 +21,8 @@
       "purpose": "any maskable"
     },
     {
-      "src": "icons/icon-128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
       "src": "icons/icon-144.png",
       "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-152.png",
-      "sizes": "152x152",
       "type": "image/png",
       "purpose": "any maskable"
     },
@@ -45,25 +33,10 @@
       "purpose": "any maskable"
     },
     {
-      "src": "icons/icon-384.png",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "screenshots/gameplay1.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "platform": "wide",
-      "label": "Feather Dash Pro Gameplay"
     }
   ],
   "categories": ["games", "arcade", "action"],
