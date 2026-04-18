@@ -1,7 +1,7 @@
 {
   "background_color": "#ffffff",
   "dir": "auto",
-  "display": "standalone",
+  "display": "fullscreen",
   "name": "Feather Dash Pro",
   "orientation": "any",
   "scope": "https://mdhabib9900.github.io/Feather-Dash/",
