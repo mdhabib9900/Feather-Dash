@@ -39,6 +39,11 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["games", "arcade", "action"],
-  "iarc_rating_id": "e84b1a2c-6b3d-4c7e-9f2a-1d5e8f7a9b3c"
+  "categories": [
+    "games",
+    "arcade",
+    "action"
+  ],
+  "iarc_rating_id": "e84b1a2c-6b3d-4c7e-9f2a-1d5e8f7a9b3c",
+  "id": "https://mdhabib9900.github.io/Feather-Dash/"
 }
