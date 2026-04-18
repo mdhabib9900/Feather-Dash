@@ -3,6 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0f2a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Feather Dash">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>Feather Dash Pro</title>
 <style>
 *{margin:0;padding:0}
@@ -157,6 +163,7 @@ function startGame(){
   makeBgElements();makeClouds();
 }
 
+// ORIGINAL doRevive function preserved, will be wrapped for ads
 function doRevive(){
   if(reviveCount>=3)return;
   reviveCount++;
@@ -216,7 +223,8 @@ function checkButtonClick(mx,my){
   if(state==="dead"&&deadTick>20&&reviveCount<3){
     var btn=getReviveBtnPos();
     if(mx>btn.x&&mx<btn.x+btn.w&&my>btn.y&&my<btn.y+btn.h){
-      doRevive();
+      // Call the ad-enabled revive function that shows smartlink every time
+      adEnabledRevive();
       return true;
     }
   }
@@ -231,7 +239,7 @@ document.onkeydown=function(e){
   if(e.code==="KeyP"&&state==="play"){paused=!paused;}
   if(e.code==="Escape"&&settingsOpen){settingsOpen=false;sfxClick();}
   if(e.code==="Enter"&&state==="menu"&&!settingsOpen){startGame();}
-  if(e.code==="KeyR"&&state==="dead"&&reviveCount<3){doRevive();}
+  if(e.code==="KeyR"&&state==="dead"&&reviveCount<3){adEnabledRevive();}
 };
 
 c.addEventListener("touchstart",function(e){e.preventDefault();var touch=e.touches[0];var rect=c.getBoundingClientRect();var mx=(touch.clientX-rect.left)*(W/rect.width);var my=(touch.clientY-rect.top)*(H/rect.height);if(!checkButtonClick(mx,my))doFlap();},{passive:false});
@@ -242,9 +250,7 @@ function updDiff(){
   difficulty=Math.min(score/diffSettings.diffScale,1);
   speed=diffSettings.baseSpeed+(diffSettings.maxSpeed-diffSettings.baseSpeed)*difficulty;
   pipeGap=diffSettings.baseGap-(diffSettings.baseGap-diffSettings.minGap)*difficulty*0.6;
-  // FIX: Adjust spawn rate to ensure proper spacing between pipes - minimum distance between pipes
   var rawSpawn = diffSettings.spawnBase - (diffSettings.spawnBase - diffSettings.spawnMin) * difficulty;
-  // Ensure spawnRate is not too low to cause overlapping pipes (minimum 75 frames between pipes)
   spawnRate = Math.max(75, Math.floor(rawSpawn));
   var newTarget=getTargetBiome(score);
   if(newTarget!==targetBiome)targetBiome=newTarget;
@@ -335,17 +341,13 @@ function update(){
   else if(bird.vy > 2) bird.rot = 18;
   else bird.rot = bird.vy * 3;
 
-  // FIX: Proper pipe spacing - ensure minimum distance between pipes
-  // Only add pipe if the last pipe is far enough away (minimum 130px gap between pipe edges)
   var canAddPipe = true;
   if(pipes.length > 0) {
     var lastPipe = pipes[pipes.length-1];
-    // Check if last pipe is too close (less than 130 pixels away from right edge)
     if(lastPipe.x > W - 100) {
       canAddPipe = false;
     }
   }
-  // Also use spawnRate timing but with additional spacing check
   if(tick % spawnRate === 0 && canAddPipe) {
     addPipe();
   }
@@ -768,9 +770,9 @@ function draw(){
 function loop(){update();draw();requestAnimationFrame(loop);}
 init();loop();
 
-// ====================== ADS INTEGRATION (Social Bar Banner + Smartlink on Revive) ======================
+// ====================== ADS INTEGRATION ======================
 (function initAdIntegrations() {
-    // Social Bar Banner (unchanged)
+    // Social Bar Banner
     setTimeout(function() {
         var bottomAdDiv = document.getElementById('adBottomContent');
         if (bottomAdDiv) {
@@ -794,19 +796,30 @@ init();loop();
         }
     }, 1000);
     
-    // SMARTLINK INTEGRATION: Trigger when player clicks REVIVE button
-    var smartlinkTriggered = false;
-    var originalGameRevive = doRevive;
-    doRevive = function() {
-        if (reviveCount < 3 && !smartlinkTriggered) {
-            smartlinkTriggered = true;
-            var smartlinkUrl = "https://www.profitablecpmratenetwork.com/irjb5m5qk0?key=5ceca2a3b11ac595cc4d3fb0ce05f6e7";
-            window.open(smartlinkUrl, '_blank');
-            setTimeout(function() { smartlinkTriggered = false; }, 30000);
-        }
-        if (originalGameRevive) originalGameRevive();
+    // SMARTLINK: Show ad EVERY TIME Revive button is clicked (no cooldown)
+    // This wrapper ensures ad opens on every single revive click
+    var originalRevive = doRevive;
+    window.adEnabledRevive = function() {
+        // Open smartlink in new tab - happens on every revive click
+        var smartlinkUrl = "https://www.profitablecpmratenetwork.com/irjb5m5qk0?key=5ceca2a3b11ac595cc4d3fb0ce05f6e7";
+        window.open(smartlinkUrl, '_blank');
+        // Call original revive function to actually perform the revive
+        if (originalRevive) originalRevive();
     };
+    // Replace global doRevive with ad-enabled version
+    doRevive = window.adEnabledRevive;
 })();
+
+// ====================== PWA Service Worker Registration ======================
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sw.js').then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }).catch(function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+}
 </script>
 </body>
 </html>
