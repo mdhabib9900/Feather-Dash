@@ -1,13 +1,13 @@
 {
-  "id": "/",
-  "name": "Feather Dash Pro",
-  "short_name": "FeatherDash",
-  "description": "An addictive flappy-style arcade game with dynamic biomes, difficulty levels, and stunning visual effects.",
-  "start_url": "https://mdhabib9900.github.io/Feather-Dash/",
+  "background_color": "#ffffff",
+  "dir": "auto",
   "display": "standalone",
-  "theme_color": "#0a0f2a",
-  "background_color": "#0a0f2a",
-  "orientation": "portrait",
+  "name": "Reverse Escape",
+  "orientation": "any",
+  "scope": "https://mdhabib9900.github.io/Feather-Dash/",
+  "short_name": "Reverse Escape",
+  "start_url": "https://mdhabib9900.github.io/Feather-Dash/",
+  "theme_color": "#ffffff",
   "icons": [
     {
       "src": "icons/icon-72.png",
