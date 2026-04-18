@@ -3,7 +3,7 @@
   "dir": "auto",
   "display": "fullscreen",
   "name": "Feather Dash Pro",
-  "orientation": "any",
+  "orientation": "portrait",
   "scope": "https://mdhabib9900.github.io/Feather-Dash/",
   "short_name": "Feather Dash",
     "description": "An addictive flappy-style arcade game with dynamic biomes, difficulty levels, and stunning visual effects.",
