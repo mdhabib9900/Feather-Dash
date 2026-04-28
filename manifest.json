@@ -1,44 +1,42 @@
 {
-  "background_color": "#ffffff",
-  "dir": "auto",
-  "display": "fullscreen",
   "name": "Feather Dash Pro",
-  "orientation": "portrait",
-  "scope": "https://mdhabib9900.github.io/Feather-Dash/",
   "short_name": "Feather Dash",
-    "description": "An addictive flappy-style arcade game with dynamic biomes, difficulty levels, and stunning visual effects.",
-  "start_url": "https://mdhabib9900.github.io/Feather-Dash/",
+  "description": "An addictive flappy-style arcade game with dynamic biomes, difficulty levels, and stunning visual effects.",
+
+  "start_url": "./index.html",
+  "scope": "./",
+
+  "display": "standalone",
+  "orientation": "portrait",
+
+  "background_color": "#ffffff",
   "theme_color": "#ffffff",
+
   "icons": [
     {
       "src": "icon-72x72.png",
       "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "icon-96x96.png",
       "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "icon-144x144.png",
       "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
   ]
 }
